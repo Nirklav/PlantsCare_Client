@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Plants Care</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="main_fragment_label">Main Fragment</string>
+    <string name="water_fragment_label">Water Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="main_make_photo">Make photo</string>
+    <string name="main_photo_description">Plant photo</string>
+    <string name="main_check_water">Check water</string>
+    <string name="main_water">Water</string>
+
+    <string name="water_duration">Duration:</string>
+    <string name="water_start">Start</string>
+    <string name="water_without_water_level_check">Without water level check</string>
+</resources>

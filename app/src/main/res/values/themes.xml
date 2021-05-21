@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.PlantsCare" parent="Theme.AppCompat.Light">
+
+    </style>
+
+    <style name="Theme.PlantsCare.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
