@@ -12,12 +12,13 @@ public class WaterCommand
   public WaterCommand(IMain main, int duration, boolean force)
   {
     super(main, Input.class, Output.class);
-    setServerMethod("water");
-    setInput(input());
-    setUrl(main.server().url());
 
     this.duration = duration;
     this.force = force;
+
+    setServerMethod("water");
+    setInput(input());
+    setUrl(main.server().url());
   }
 
   private Input input()
