@@ -127,28 +127,31 @@ public class TouchableImageView
   {
     // Restrict scale and positions
     Drawable drawable = getDrawable();
-    final int dWidth = drawable.getIntrinsicWidth();
-    final int dHeight = drawable.getIntrinsicHeight();
-    final int vWidth = getWidth() - getPaddingLeft() - getPaddingRight();
-    final int vHeight = getHeight() - getPaddingTop() - getPaddingBottom();
+    if (drawable != null)
+    {
+      final int dWidth = drawable.getIntrinsicWidth();
+      final int dHeight = drawable.getIntrinsicHeight();
+      final int vWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+      final int vHeight = getHeight() - getPaddingTop() - getPaddingBottom();
 
-    final float wScale = vWidth / (float) dWidth;
-    final float hScale = vHeight / (float) dHeight;
-    final float minScale = Math.min(wScale, hScale);
-    scaleFactor = Math.max(minScale, Math.min(scaleFactor, 5.0f));
+      final float wScale = vWidth / (float) dWidth;
+      final float hScale = vHeight / (float) dHeight;
+      final float minScale = Math.min(wScale, hScale);
+      scaleFactor = Math.max(minScale, Math.min(scaleFactor, 5.0f));
 
-    final float rdWidth = Math.max(0, dWidth * scaleFactor - vWidth);
-    final float rdHeight = Math.max(0, dHeight * scaleFactor - vHeight);
-    posX = clamp(posX, -rdWidth / 2, rdWidth / 2);
-    posY = clamp(posY, -rdHeight / 2, rdHeight / 2);
+      final float rdWidth = Math.max(0, dWidth * scaleFactor - vWidth);
+      final float rdHeight = Math.max(0, dHeight * scaleFactor - vHeight);
+      posX = clamp(posX, -rdWidth / 2, rdWidth / 2);
+      posY = clamp(posY, -rdHeight / 2, rdHeight / 2);
 
-    final int shiftX = (int)(vWidth / 2f - dWidth * scaleFactor / 2f);
-    final int shiftY = (int)(vHeight / 2f - dHeight * scaleFactor / 2f);
+      final int shiftX = (int)(vWidth / 2f - dWidth * scaleFactor / 2f);
+      final int shiftY = (int)(vHeight / 2f - dHeight * scaleFactor / 2f);
 
-    Matrix matrix = new Matrix();
-    matrix.setScale(scaleFactor, scaleFactor);
-    matrix.postTranslate(posX + shiftX, posY + shiftY);
-    setImageMatrix(matrix);
+      Matrix matrix = new Matrix();
+      matrix.setScale(scaleFactor, scaleFactor);
+      matrix.postTranslate(posX + shiftX, posY + shiftY);
+      setImageMatrix(matrix);
+    }
   }
 
   private int clamp(float value, float min, float max)

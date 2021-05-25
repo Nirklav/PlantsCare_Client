@@ -61,16 +61,24 @@ public class MainFragment
 
     binding.buttonMakePhoto.setOnClickListener(btn ->
     {
+      setInProgress(true);
+
       new GetCameraImageCommand(main)
         .setCallbacksToMainThread()
         .setOnSuccess(cmd -> binding.imagePhoto.setImageBitmap(cmd.getImage()))
-        .setOnFinished(cmd -> binding.progressBar.setProgress(0))
+        .setOnFinished(cmd ->
+        {
+          setInProgress(false);
+          binding.progressBar.setProgress(0);
+        })
         .trackProgress((cmd, p) -> binding.progressBar.setProgress(p))
         .sendAsync();
     });
 
     binding.buttonCheckWater.setOnClickListener(btn ->
     {
+      setInProgress(true);
+
       new IsEnoughWaterCommand(main)
         .setCallbacksToMainThread()
         .setOnSuccess(cmd ->
@@ -78,12 +86,20 @@ public class MainFragment
           waterStatus = cmd.getOutput().result;
           setText();
         })
+        .setOnFinished(cmd -> setInProgress(false))
         .sendAsync();
     });
 
     binding.buttonWater.setOnClickListener(btn -> Navigation
       .findNavController(view)
       .navigate(R.id.action_MainFragment_to_WaterFragment));
+  }
+
+  private void setInProgress(boolean value)
+  {
+    binding.buttonMakePhoto.setEnabled(!value);
+    binding.buttonCheckWater.setEnabled(!value);
+    binding.buttonWater.setEnabled(!value);
   }
 
   private void setText()

@@ -25,7 +25,6 @@ public class WaterFragment
 {
   private IMain main;
   private FragmentWaterBinding binding;
-  private boolean inProcess;
 
   @Override
   public void onAttach(@NonNull Context context)
@@ -61,31 +60,28 @@ public class WaterFragment
         return;
       }
 
-      if (!inProcess)
-      {
-        inProcess = true;
-        binding.progressBarLoading.setVisibility(View.VISIBLE);
+      binding.buttonStart.setEnabled(false);
+      binding.progressBarLoading.setVisibility(View.VISIBLE);
 
-        new WaterCommand(main, duration, force)
-          .setCallbacksToMainThread()
-          .setOnSuccess(cmd ->
-          {
-            inProcess = false;
-            binding.progressBarLoading.setVisibility(View.INVISIBLE);
+      new WaterCommand(main, duration, force)
+        .setCallbacksToMainThread()
+        .setOnSuccess(cmd ->
+        {
+          binding.buttonStart.setEnabled(true);
+          binding.progressBarLoading.setVisibility(View.INVISIBLE);
 
-            WaterCommand.Output output = cmd.getOutput();
-            String result = output.result ? "Success" : "Fail";
-            String message = String.format("%s: %s", result, output.message);
+          WaterCommand.Output output = cmd.getOutput();
+          String result = output.result ? "Success" : "Fail";
+          String message = String.format("%s: %s", result, output.message);
 
-            Bundle args = new Bundle();
-            args.putString("message", message);
+          Bundle args = new Bundle();
+          args.putString("message", message);
 
-            Navigation
-              .findNavController(view)
-              .navigate(R.id.action_WaterFragment_to_MainFragment, args);
-          })
-          .sendAsync();
-      }
+          Navigation
+            .findNavController(view)
+            .navigate(R.id.action_WaterFragment_to_MainFragment, args);
+        })
+        .sendAsync();
     });
   }
 
