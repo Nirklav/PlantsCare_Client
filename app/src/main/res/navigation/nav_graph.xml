@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_MainFragment_to_WaterFragment"
             app:destination="@id/WaterFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_cameraAngleFragment"
+            app:destination="@id/cameraAngleFragment" />
     </fragment>
     <fragment
         android:id="@+id/WaterFragment"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_water" >
         <action
             android:id="@+id/action_WaterFragment_to_MainFragment"
-            app:destination="@id/MainFragment" />
+            app:popUpTo="@id/MainFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/cameraAngleFragment"
+        android:name="com.thirtynineeighty.plantscare.fragments.CameraAngleFragment"
+        android:label="fragment_camera_angle"
+        tools:layout="@layout/fragment_camera_angle" >
+        <action
+            android:id="@+id/action_cameraAngleFragment_to_MainFragment"
+            app:popUpTo="@id/MainFragment" />
+    </dialog>
 </navigation>

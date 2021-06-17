@@ -1,7 +1,6 @@
 package com.thirtynineeighty.plantscare.fragments;
 
 import android.content.Context;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +74,10 @@ public class MainFragment
         .sendAsync();
     });
 
+    binding.buttonAngle.setOnClickListener(btn -> Navigation
+      .findNavController(view)
+      .navigate(R.id.action_MainFragment_to_cameraAngleFragment));
+
     binding.buttonCheckWater.setOnClickListener(btn ->
     {
       setInProgress(true);
@@ -98,6 +101,7 @@ public class MainFragment
   private void setInProgress(boolean value)
   {
     binding.buttonMakePhoto.setEnabled(!value);
+    binding.buttonAngle.setEnabled(!value);
     binding.buttonCheckWater.setEnabled(!value);
     binding.buttonWater.setEnabled(!value);
   }

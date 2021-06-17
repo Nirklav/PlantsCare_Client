@@ -61,6 +61,14 @@
             android:text="@string/main_make_photo" />
 
         <Button
+            android:id="@+id/buttonAngle"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/main_angle"/>
+
+        <Button
             android:id="@+id/buttonCheckWater"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
